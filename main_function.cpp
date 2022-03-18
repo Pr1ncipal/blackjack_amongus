@@ -8,8 +8,3 @@ int main()
     
     return 0;
 }
-
-int function()
-{
-    cout << "how I met your mother";
-}
