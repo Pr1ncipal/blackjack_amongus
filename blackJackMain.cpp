@@ -1,18 +1,20 @@
 #include <iostream>
 #include <cmath>
 #include <ctime> //allows you to access the time
+#include <cstdlib>
 
-#include "black.h"
+//#include "black.h"
 
 using namespace std;
 //initialize the bet function
 void bet(int wager);
 void start();
+void dealer();
 
 int main()
 {
 
-    srand((unsigned)time(0)); //dont really know but lets u choose a random number. we used it in a previous lab
+    srand((unsigned)time(0));
 
     /*srand is how you make a random number generator. however, since a computer doesn't understand what "random" actually is, you have to tell the computer where
     you want it to find the number from. in windows/c++/something, there is a way it finds the time in the background (ctime), but the time isn't in human
@@ -30,6 +32,8 @@ int main()
     //calls the bet function
     bet(wager);
     
+    dealer();
+
     return 0;
 }
 
@@ -55,6 +59,135 @@ void bet(int wager)
     }
     else
     {
-        cout << "you bet " << wager;
+        cout << "you bet " << wager <<" chips. "<<endl;
+    }
+}
+
+void dealer()
+{
+    int dCard1 = rand() % 13 + 1;
+    int dCard2 = rand() % 13 + 1;
+    int pCard1 = rand() % 13 + 1;
+    int pCard2 = rand() % 13 + 1;
+
+    cout<<"the dealer has "<<endl;
+
+    switch (dCard1)
+    {
+		case 1: 
+        {
+            cout << "an Ace and "; 
+			break;
+        }
+		case 11: 
+        {
+            cout << "a Jack and "; 
+			break;
+        }
+		case 12: 
+        {
+            cout << "a Queen and ";
+			break;
+        }
+		case 13: 
+        {
+            cout << "a King and "; 
+			break;
+        }
+		default: 
+        {
+            cout <<"a "<< dCard1 << " and ";
+			break;
+        }
+    }
+    switch (dCard2) 
+    {
+		case 1: 
+        {
+
+            cout << "an Ace"; 
+			break;
+        }
+		case 11: 
+        {
+            cout << "a Jack"; 
+			break;
+        }
+		case 12: 
+        {
+            cout << "a Queen";
+			break;
+        }
+		case 13: 
+        {
+            cout << "a King"; 
+			break;
+        }
+		default: 
+        {
+            cout <<"a "<< dCard2;
+			break;
+        }
+    }
+//--------------------------------------------------------------------------------------
+    cout<<endl;
+    cout<<endl;
+    cout<<"the player has "<<endl;
+     switch (pCard1)
+    {
+		case 1: 
+        {
+            cout << " an Ace and "; 
+			break;
+        }
+		case 11: 
+        {
+            cout << "a Jack and "; 
+			break;
+        }
+		case 12: 
+        {
+            cout << "a Queen and ";
+			break;
+        }
+		case 13: 
+        {
+            cout << "a King and "; 
+			break;
+        }
+		default: 
+        {
+            cout << "a "<<pCard1 << " and ";
+			break;
+        }
+    }
+    switch (pCard2) 
+    {
+		case 1: 
+        {
+
+            cout << " an Ace"; 
+			break;
+        }
+		case 11: 
+        {
+            cout << "a Jack"; 
+			break;
+        }
+		case 12: 
+        {
+            cout << "a Queen";
+			break;
+        }
+		case 13: 
+        {
+            cout << "a King"; 
+			break;
+        }
+		default: 
+        {
+            cout <<"a "<< pCard2;
+			break;
+        }
     }
 }
