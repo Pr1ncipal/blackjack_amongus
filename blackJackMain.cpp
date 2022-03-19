@@ -34,7 +34,7 @@ int main()
     switch (x)
     {
         case 1:
-            tutorial();
+            //tutorial();
             break;
         case 0:
             start();
