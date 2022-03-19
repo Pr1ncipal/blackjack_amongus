@@ -3,22 +3,30 @@
 #include <ctime> //allows you to access the time
 #include <cstdlib>
 
+
 //#include "black.h"
 
 using namespace std;
+
 //initialize the bet function
 void bet(int wager, int& balance);
 void start();
 void dealer(int& wager);
+void tutorial();
 
 int balance = 100;
 
+
 int main()
 {
-
+    int balance = 100, wager;
+    
+    //Seeds RNG. 
     srand((unsigned)time(0));
 
-    /*srand is how you make a random number generator. however, since a computer doesn't understand what "random" actually is, you have to tell the computer where
+    //Explains how a RNG works.
+    /*
+    srand is how you make a random number generator. however, since a computer doesn't understand what "random" actually is, you have to tell the computer where
     you want it to find the number from. in windows/c++/something, there is a way it finds the time in the background (ctime), but the time isn't in human
     readable date form, its just a bunch of numbers. In essence, this is a simple way to generate a "random number". while the number isn't TRULY random and could
     technically be found and used to cheat, that would be excessively diffifcult just to gimp a RNG. - Adrian
@@ -36,12 +44,11 @@ int main()
     //calls the bet function
     bet(wager, balance);
     dealer(wager);
-
-{
     }
     return 0;
 }
 
+//Start function. unsure of usage currently, broken.
 void start()
 {
      //add rules and directions maybe
@@ -50,6 +57,23 @@ void start()
     cout << "Rules & directions go here....\n" << endl;
 }
 
+/*
+void tutorial()
+{
+    cout << "When you play the house, you play against the casino, which is represented by the dealer. " << endl;
+    cout << "The dealer deals one card face up to each player, from left to right, with the last card going to the houses hand, which is face down. " << endl;
+    cout << "The dealer will then deal one card facing up to each player and then the house." << endl;
+    
+    cout << "After the initial deal, the blackjack rules indicate that the dealer will ask each player, in succession, if he/she needs one or more cards." << endl; 
+    cout << "As the player, you can ask for one or more cards(called a hit)until you either go over 21 (bust), or you think you have the best possible hand." << endl;
+
+    cout << "Once you have all the cards you need, you stay or stand, meaning you signal to the dealer that you dont want any more cards. " << endl;
+    cout << "Each subsequent player then decides whether to hit or stand." << endl;
+
+    cout << "After all the players have completed their hands or gone bust, the dealer reveals his or her down card. " << endl;
+    cout << "Depending on the cards in the dealers hand, the blackjack rules at the table will dictate whether the dealer will hit or stand." << endl;
+}
+*/
 
 //betting functions20
 void bet(int wager, int& balance)
@@ -70,6 +94,7 @@ void bet(int wager, int& balance)
     }
 }
 
+
 void dealer(int& wager) //ace needs fixing
 {
     int dCard1 = rand() % 13 + 1;
@@ -78,62 +103,158 @@ void dealer(int& wager) //ace needs fixing
     int pCard2 = rand() % 13 + 1;
     int totalD, totalP;
 
-    cout<<"the dealer has "<<endl;
+    cout<<"\nCards Up! The dealer has:\n "<<endl;
 
     switch (dCard1)
     {
 		case 1: 
         {
-            cout << "an Ace and "; 
+            cout << "**********" << endl;
+            cout << "*      " << "A" << " *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "* " << "A" << "      *" << endl;
+            cout << "**********" << endl;
+            cout << "an Ace " << endl; 
 			break;
         }
-		case 11: 
+		case 10:
         {
-            cout << "a Jack and "; 
+            cout << "**********" << endl;
+            cout << "*      " << "10" << "*" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "*" << "10" << "      *" << endl;
+            cout << "**********" << endl;
+            cout << "a 10 " << endl; 
+			break;
+        }
+        case 11: 
+        {
+            cout << "**********" << endl;
+            cout << "*      " << "J" << " *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "* " << "J" << "      *" << endl;
+            cout << "**********" << endl;
+            cout << "a Jack " << endl; 
 			break;
         }
 		case 12: 
         {
-            cout << "a Queen and ";
+            cout << "**********" << endl;
+            cout << "*      " << "Q" << " *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "* " << "Q" << "      *" << endl;
+            cout << "**********" << endl;
+            cout << "a Queen " << endl;
 			break;
         }
 		case 13: 
         {
-            cout << "a King and "; 
+            cout << "**********" << endl;
+            cout << "*      " << "K" << " *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "* " << "K" << "      *" << endl;
+            cout << "**********" << endl;
+            cout << "a King "<< endl; 
 			break;
         }
 		default: 
         {
-            cout <<"a "<< dCard1 << " and ";
+            cout << "**********" << endl;
+            cout << "*      " << dCard1 << " *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "* " << dCard1 << "      *" << endl;
+            cout << "**********" << endl;
+            cout <<"a "<< dCard1 << endl;
 			break;
         }
     }
+    
+    cout << "As well as... " << endl;
+    
     switch (dCard2) 
     {
 		case 1: 
         {
-
-            cout << "an Ace"; 
+            cout << "**********" << endl;
+            cout << "*      " << "A" << " *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "* " << "A" << "      *" << endl;
+            cout << "**********" << endl;
+            cout << "an Ace" << endl; 
+			break;
+        }
+        case 10:
+        {
+            cout << "**********" << endl;
+            cout << "*      " << "10" << "*" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "*" << "10" << "      *" << endl;
+            cout << "**********" << endl;
+            cout << "a 10 " << endl; 
 			break;
         }
 		case 11: 
         {
-            cout << "a Jack"; 
+            cout << "**********" << endl;
+            cout << "*      " << "J" << " *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "* " << "J" << "      *" << endl;
+            cout << "**********" << endl;
+            cout << "a Jack" << endl; 
 			break;
         }
 		case 12: 
         {
-            cout << "a Queen";
+            cout << "**********" << endl;
+            cout << "*      " << "Q" << " *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "* " << "Q" << "      *" << endl;
+            cout << "**********" << endl;
+            cout << "a Queen" << endl;
 			break;
         }
 		case 13: 
         {
-            cout << "a King"; 
+            cout << "**********" << endl;
+            cout << "*      " << "K" << " *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "* " << "K" << "      *" << endl;
+            cout << "**********" << endl;
+            cout << "a King" << endl; 
 			break;
         }
 		default: 
         {
-            cout <<"a "<< dCard2;
+            cout << "**********" << endl;
+            cout << "*      " << dCard2 << " *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "* " << dCard2 << "      *" << endl;
+            cout << "**********" << endl;
+            cout <<"a "<< dCard2 << endl;
 			break;
         }
     }
@@ -144,64 +265,161 @@ void dealer(int& wager) //ace needs fixing
 //--------------------------------------------------------------------------------------
     cout<<endl;
     cout<<endl;
-    cout<<"the player has "<<endl;
-     switch (pCard1)
+    cout<<"However, the player has...\n "<<endl;
+    switch (pCard1)
     {
 		case 1: 
         {
-            cout << " an Ace and "; 
+            cout << "**********" << endl;
+            cout << "*      " << "A" << " *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "* " << "A" << "      *" << endl;
+            cout << "**********" << endl;
+            cout << "an Ace " << endl; 
 			break;
         }
-		case 11: 
+		case 10:
         {
-            cout << "a Jack and "; 
+            cout << "**********" << endl;
+            cout << "*      " << "10" << "*" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "*" << "10" << "      *" << endl;
+            cout << "**********" << endl;
+            cout << "a 10 " << endl; 
+			break;
+        }
+        case 11: 
+        {
+            cout << "**********" << endl;
+            cout << "*      " << "J" << " *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "* " << "J" << "      *" << endl;
+            cout << "**********" << endl;
+            cout << "a Jack " << endl; 
 			break;
         }
 		case 12: 
         {
-            cout << "a Queen and ";
+            cout << "**********" << endl;
+            cout << "*      " << "Q" << " *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "* " << "Q" << "      *" << endl;
+            cout << "**********" << endl;
+            cout << "a Queen " << endl;
 			break;
         }
 		case 13: 
         {
-            cout << "a King and "; 
+            cout << "**********" << endl;
+            cout << "*      " << "K" << " *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "* " << "K" << "      *" << endl;
+            cout << "**********" << endl;
+            cout << "a King "<< endl; 
 			break;
         }
 		default: 
         {
-            cout << "a "<<pCard1 << " and ";
+            cout << "**********" << endl;
+            cout << "*      " << pCard1 << " *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "* " << pCard1 << "      *" << endl;
+            cout << "**********" << endl;
+            cout <<"a "<< pCard1 << endl;
 			break;
         }
     }
+
+    cout << "As well as... " << endl;
+
     switch (pCard2) 
     {
 		case 1: 
         {
-
-            cout << " an Ace"; 
+            cout << "**********" << endl;
+            cout << "*      " << "A" << " *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "* " << "A" << "      *" << endl;
+            cout << "**********" << endl;
+            cout << "an Ace" << endl; 
+			break;
+        }
+        case 10:
+        {
+            cout << "**********" << endl;
+            cout << "*      " << "10" << "*" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "*" << "10" << "      *" << endl;
+            cout << "**********" << endl;
+            cout << "a 10 " << endl; 
 			break;
         }
 		case 11: 
         {
-            cout << "a Jack"; 
+            cout << "**********" << endl;
+            cout << "*      " << "J" << " *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "* " << "J" << "      *" << endl;
+            cout << "**********" << endl;
+            cout << "a Jack" << endl; 
 			break;
         }
 		case 12: 
         {
-            cout << "a Queen";
+            cout << "**********" << endl;
+            cout << "*      " << "Q" << " *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "* " << "Q" << "      *" << endl;
+            cout << "**********" << endl;
+            cout << "a Queen" << endl;
 			break;
         }
 		case 13: 
         {
-            cout << "a King"; 
+            cout << "**********" << endl;
+            cout << "*      " << "K" << " *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "* " << "K" << "      *" << endl;
+            cout << "**********" << endl;
+            cout << "a King" << endl; 
 			break;
         }
 		default: 
         {
-            cout <<"a "<< pCard2;
+            cout << "**********" << endl;
+            cout << "*      " << pCard2 << " *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "*        *" << endl;
+            cout << "* " << pCard2 << "      *" << endl;
+            cout << "**********" << endl;
+            cout <<"a "<< pCard2 << endl;
 			break;
         }
     }
+
     cout<<endl;
     totalP = pCard1 + pCard2;
     int winning = 1.5*wager; //for some reason wager only outputs $0
