@@ -3,14 +3,19 @@
 #include <ctime> //allows you to access the time
 #include <cstdlib>
 
+
 //#include "black.h"
 
 using namespace std;
-//Initializes various functions
-void bet(int wager);
+
+//initialize the bet function
+void bet(int wager, int& balance);
 void start();
-void dealer();
+void dealer(int& wager);
 void tutorial();
+
+int balance = 100;
+
 
 int main()
 {
@@ -27,108 +32,21 @@ int main()
     technically be found and used to cheat, that would be excessively diffifcult just to gimp a RNG. - Adrian
     */
 
-    //Asks the player if they need a tutorial or if they want to start the game. Currently broken.
-    /*
-    bool x = 1;
-    cout << "Do you need a tutorial? 1 for yes, 0 for no." << endl;
-    cin >> x;
-    */
+    //class called blackType
 
-    //Calls the bet function
-    /*
-    bet(wager);
-    */
-    
-    //Calls the dealer function.
-    dealer();
-    
+    int wager;
+
+    //uses the start function
+    start();
+
+    while(balance > 0)
+    {
+    //calls the bet function
+    bet(wager, balance);
+    dealer(wager);
+    }
     return 0;
 }
-
-//Prints cards based on values. Not useful, since dealer function does this.
-void cardPrinter()
-{
-int x;
-switch (x)
-{
-    case 2:
-    case 3:
-    case 4:
-    case 5:
-    case 6:
-    case 7:
-    case 8:
-    case 9:
-    {
-        cout << "**********" << endl;
-        cout << "*      " << x << " *" << endl;
-        cout << "*        *" << endl;
-        cout << "*        *" << endl;
-        cout << "*        *" << endl;
-        cout << "* " << x << "      *" << endl;
-        cout << "**********" << endl;
-        break;
-    }
-    case 10:
-    {
-        cout << "**********" << endl;
-        cout << "*      " << x << "*" << endl;
-        cout << "*        *" << endl;
-        cout << "*        *" << endl;
-        cout << "*        *" << endl;
-        cout << "*" << x << "      *" << endl;
-        cout << "**********" << endl;
-        break;
-    }
-    case 11:
-    {
-        cout << "**********" << endl;
-        cout << "*      " << "J" << " *" << endl;
-        cout << "*        *" << endl;
-        cout << "*        *" << endl;
-        cout << "*        *" << endl;
-        cout << "* " << "J" << "      *" << endl;
-        cout << "**********" << endl;
-        break;
-    }
-    case 12:
-    {
-        cout << "**********" << endl;
-        cout << "*      " << "Q" << " *" << endl;
-        cout << "*        *" << endl;
-        cout << "*        *" << endl;
-        cout << "*        *" << endl;
-        cout << "* " << "Q" << "      *" << endl;
-        cout << "**********" << endl;
-        break;
-    }
-    case 13:
-    {
-        cout << "**********" << endl;
-        cout << "*      " << "K" << " *" << endl;
-        cout << "*        *" << endl;
-        cout << "*        *" << endl;
-        cout << "*        *" << endl;
-        cout << "* " << "K" << "      *" << endl;
-        cout << "**********" << endl;
-        break;
-    }
-    case 1:
-    case 14:
-    {
-        cout << "**********" << endl;
-        cout << "*      " << "A" << " *" << endl;
-        cout << "*        *" << endl;
-        cout << "*        *" << endl;
-        cout << "*        *" << endl;
-        cout << "* " << "A" << "      *" << endl;
-        cout << "**********" << endl;
-        break;
-    }
-
-} //Ends switch statement
-    
-} // Ends function.
 
 //Start function. unsure of usage currently, broken.
 void start()
@@ -139,7 +57,7 @@ void start()
     cout << "Rules & directions go here....\n" << endl;
 }
 
-//Tutorial function. currently broken
+/*
 void tutorial()
 {
     cout << "When you play the house, you play against the casino, which is represented by the dealer. " << endl;
@@ -155,14 +73,15 @@ void tutorial()
     cout << "After all the players have completed their hands or gone bust, the dealer reveals his or her down card. " << endl;
     cout << "Depending on the cards in the dealers hand, the blackjack rules at the table will dictate whether the dealer will hit or stand." << endl;
 }
+*/
 
-//betting functions
-void bet(int wager)
+//betting functions20
+void bet(int wager, int& balance)
 {
     cout<<"input the amount of chips you woul like to wager. minimum wager is 1 chip."<<endl;
     cin>>wager;
    
-    if(wager > 100 || wager < 1)
+    if(wager > 100 || wager < 1 || wager > balance)
     {
         cout << "your bet is incorrect. input again please.";
         cin >> wager; 
@@ -170,16 +89,19 @@ void bet(int wager)
     else
     {
         cout << "you bet " << wager <<" chips. "<<endl;
+        balance = balance - wager;
+        cout<<"your current balance is "<<balance<<endl;
     }
 }
 
-//Prints out what cards the player and dealer have. Currently, it just generates random cards.
-void dealer()
+
+void dealer(int& wager) //ace needs fixing
 {
     int dCard1 = rand() % 13 + 1;
     int dCard2 = rand() % 13 + 1;
     int pCard1 = rand() % 13 + 1;
     int pCard2 = rand() % 13 + 1;
+    int totalD, totalP;
 
     cout<<"\nCards Up! The dealer has:\n "<<endl;
 
@@ -336,6 +258,10 @@ void dealer()
 			break;
         }
     }
+    cout<<endl;
+    totalD = dCard1 + dCard2;
+    cout<<"dealer's total is "<<dCard1 + dCard2<<endl;
+        //needs to be fixed for aces being 11 and 1
 //--------------------------------------------------------------------------------------
     cout<<endl;
     cout<<endl;
@@ -494,6 +420,26 @@ void dealer()
         }
     }
 
-    cout << endl;
+    cout<<endl;
+    totalP = pCard1 + pCard2;
+    int winning = 1.5*wager; //for some reason wager only outputs $0
+    cout<<"the player's total is "<< totalP<<endl;
 
+//temporary should move to another func
+    if(pCard1 == 1 && pCard2 == 10|11|12|13)
+    {
+        cout<<"Black Jack! You win "<<winning<<"!"<<endl;
+    } 
+    else if(pCard2 == 1 && pCard1 == 10|11|12|13)
+    {
+        cout<<"Black Jack! You win "<<winning<<"!"<<endl;
+    }
+    else if(totalP>totalD && totalP<21)
+    {
+        cout<<"you win! $"<<wager*wager<<"!"<<endl;
+    }
+    else
+        cout<<"you lose :( $"<<wager<<endl;
+        
+    //needs to be fixed for aces being 11 and 1
 }
